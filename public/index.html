@@ -1,0 +1,19 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8" />
+<title>AI Offline Chat</title>
+</head>
+<body>
+<h2>AI Offline Chat</h2>
+<input id="q" />
+<button onclick="send()">Send</button>
+<pre id="out"></pre>
+<script>
+async function send(){
+  let q=document.getElementById('q').value;
+  let r=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:q})});
+  let j=await r.json();
+  document.getElementById('out').textContent+= "\nYou: "+q+"\nAI: "+j.answer+"\n";
+}
+</script>
+</body></html>
